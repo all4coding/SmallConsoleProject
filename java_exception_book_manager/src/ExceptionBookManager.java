@@ -1,4 +1,5 @@
 import java.util.Scanner;
+//import java.io.*;
 
 public class ExceptionBookManager {
 	private int[] bookNum = {1, 2, 3};
@@ -48,9 +49,17 @@ public class ExceptionBookManager {
 		ebm.printBookInfo();
 		Scanner input = new Scanner(System.in);
 		System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
-		int choice = input.nextInt();
+		int choice;	//定义在外面，如果定义在try-catch里，则是局部变量
+		//int choice = input.nextInt();
 		//将原来的错误打印，以异常处理的方式输出
 		while(true){
+			try{
+				choice = input.nextInt();
+			}catch(Exception e){
+				System.out.println("命令输入错误！请根据提示输入数字命令!");
+				System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
+				continue;
+			}
 			int result = ebm.dealChoiceExc(choice);
 			if(result == -1){
 				System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
