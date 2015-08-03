@@ -29,16 +29,35 @@ public class ExceptionBookManager {
 			}
 		}
 	}
+	public void getChoice(int choice) throws Exception{
+		if(choice != 1 || choice != 2){
+			throw new Exception("命令输入错误！请根据提示输入数字命令!");
+		}
+	}
+	public int dealChoiceExc(int choice){
+		try{
+			getChoice(choice);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return -1;
+		}
+		return 1;
+	}
 	public static void main(String[] args) {
 		ExceptionBookManager ebm = new ExceptionBookManager();
 		ebm.printBookInfo();
 		Scanner input = new Scanner(System.in);
 		System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
 		int choice = input.nextInt();
+		//将原来的错误打印，以异常处理的方式输出
 		while(true){
-			if(choice != 1 || choice != 2){
-				System.out.println("命令输入错误！请根据提示输入数字命令!");
-			}else if(choice == 1){
+			int result = ebm.dealChoiceExc(choice);
+			if(result == -1){
+				System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
+				choice = input.nextInt();
+				continue;
+			}
+			if(choice == 1){
 				System.out.println("输入图书名称：");
 				String name = input.next();
 				ebm.findBookName(name);
