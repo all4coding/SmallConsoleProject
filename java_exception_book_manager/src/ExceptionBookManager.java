@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 //import java.io.*;
 
@@ -62,9 +63,19 @@ public class ExceptionBookManager {
 				String name = input.next();
 				ebm.findBookName(name);
 			}else{
-				System.out.println("输入图书序号");
-				int num = input.nextInt();
-				ebm.findBookNum(num);
+				while(true){
+					int num = 0;
+					System.out.println("输入图书序号");
+					try {
+						num = input.nextInt();
+					} catch (InputMismatchException e) {
+						//bug: 不停地输出，不知道为什么
+						System.out.println("命令输入错误！请根据提示输入数字命令!");
+						continue;
+					}
+					ebm.findBookNum(num);
+					break;
+				}
 			}			
 			System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
 			choice = input.next();
