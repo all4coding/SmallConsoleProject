@@ -14,28 +14,26 @@ public class ExceptionBookManager {
 		for(int i = 0; i < bookName.length; i++){
 			if(bookName[i].equals(name)){
 				System.out.println("book:" + bookName[i]);
-				break;
-			}else{
-				System.out.println("图书不存在");
+				return;
 			}
 		}
+		System.out.println("图书不存在");
 	}
 	public void findBookNum(int num){
 		for(int i = 0; i < bookName.length; i++){
 			if(bookNum[i] == num){
-				System.out.println("book:" + bookName[bookNum[i]]);
-				break;
-			}else{
-				System.out.println("图书不存在");
+				System.out.println("book:" + bookName[i]);
+				return;
 			}
 		}
+		System.out.println("图书不存在");
 	}
-	public void getChoice(int choice) throws Exception{
-		if(choice != 1 || choice != 2){
+	public void getChoice(String choice) throws Exception{
+		if(!choice.equals("1") && !choice.equals("2")){
 			throw new Exception("命令输入错误！请根据提示输入数字命令!");
 		}
 	}
-	public int dealChoiceExc(int choice){
+	public int dealChoiceExc(String choice){
 		try{
 			getChoice(choice);
 		}catch(Exception e){
@@ -47,26 +45,19 @@ public class ExceptionBookManager {
 	public static void main(String[] args) {
 		ExceptionBookManager ebm = new ExceptionBookManager();
 		ebm.printBookInfo();
+		
 		Scanner input = new Scanner(System.in);
 		System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
-		int choice;	//定义在外面，如果定义在try-catch里，则是局部变量
-		//int choice = input.nextInt();
+		String choice = input.next();
 		//将原来的错误打印，以异常处理的方式输出
 		while(true){
-			try{
-				choice = input.nextInt();
-			}catch(Exception e){
-				System.out.println("命令输入错误！请根据提示输入数字命令!");
-				System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
-				continue;
-			}
 			int result = ebm.dealChoiceExc(choice);
 			if(result == -1){
 				System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
-				choice = input.nextInt();
+				choice = input.next();
 				continue;
 			}
-			if(choice == 1){
+			if(choice.equals("1")){
 				System.out.println("输入图书名称：");
 				String name = input.next();
 				ebm.findBookName(name);
@@ -76,7 +67,7 @@ public class ExceptionBookManager {
 				ebm.findBookNum(num);
 			}			
 			System.out.println("输入命令：1-按照名称查找图书；2-按照序号查找图书");
-			choice = input.nextInt();
+			choice = input.next();
 		}
 	}	
 }
