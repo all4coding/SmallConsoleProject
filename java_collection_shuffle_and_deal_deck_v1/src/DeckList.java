@@ -22,10 +22,11 @@ public class DeckList {
 			do{
 				k = random.nextInt(num);
 			}while(deckList.contains(k));
-		}
-		deckList.add(k);
+			//注意：遇到for循环时，要注意是在循环外还是在循环内，否则出现bug很难知道
+			deckList.add(k);
+		}	
 	}
 	public Integer get(int deckListIndex) {
-		return this.get(deckListIndex);
+		return deckList.get(deckListIndex);
 	}
 }

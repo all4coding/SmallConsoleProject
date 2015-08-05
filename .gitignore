@@ -5,3 +5,10 @@
 **/.classpath
 .metadata/
 
+bin/
+.settings/
+.project
+.classpath
+
+test/
+

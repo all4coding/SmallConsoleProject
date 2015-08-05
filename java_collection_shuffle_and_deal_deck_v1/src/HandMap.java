@@ -30,6 +30,10 @@ public class HandMap {
 		hands.add(ID);
 	}
 	
+	public void handsPut(int i, Integer ID){
+		hands.add(i, ID);
+	}
+	
 	public int size() {
 		return hands.size();
 	}

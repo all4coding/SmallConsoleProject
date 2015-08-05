@@ -30,6 +30,7 @@ public class PlayerList {
 			}	
 			System.out.println("输入姓名：");
 			name = console.next();
+			
 			//根据输入创建一个玩家对象
 			Player player = new Player(ID, name);
 			//添加刚创建的文件到玩家队伍
@@ -41,7 +42,7 @@ public class PlayerList {
 		return players.get(i);
 	}
 
-	public void addPlayerHand(int index, Integer ID){
-		players.get(index).addPlayCards(ID);
+	public void addPlayerHand(int index, int i, Integer ID){
+		players.get(index).addPlayCards(i, ID);
 	}
 }
